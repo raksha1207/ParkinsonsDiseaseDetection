@@ -13,7 +13,7 @@ def load_data(path):
     # y2 is also a response variable but right now we are predicting only total_UPDRS score
     y2 = parkinsons_data.loc[:, 'motor_UPDRS']
 
-    X_train, y_train, X_test, y_test = train_test_split(X, y, test_size=0.3)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
     return X_train, y_train, X_test, y_test
 
