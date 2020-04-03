@@ -15,11 +15,10 @@ def load_data(path):
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-    return X_train, y_train, X_test, y_test
+    return X_train, X_test, y_train, y_test
 
 
 def extract_features(X_train, X_test):
-
     scalar = StandardScaler()
     scalar.fit(X_train)
 
@@ -29,11 +28,13 @@ def extract_features(X_train, X_test):
     pca = PCA(0.95)
     pca.fit(X_train)
 
-    print(pca.n_components_)
+    print("number of principal components selected are " + str(pca.n_components_))
     # print(pca.components_)
 
     X_train = pca.transform(X_train)
     X_test = pca.transform(X_test)
 
-    return X_train, X_test
+    X_train = pd.DataFrame(data=X_train)
+    X_test = pd.DataFrame(data=X_test)
 
+    return X_train, X_test
