@@ -4,20 +4,19 @@ import math
 
 
 def svr_model(X_train, y_train, X_test, y_test):
-    #create model using different kernels
+    # create model using different kernels
     svr_rbf = SVR(kernel='rbf', C=100, gamma=0.1, epsilon=0.1)
-    
-    #fit model on training data
-    svr_rbf.fit(X_train, y_train)
-    
-    #make predictions on test data
-    y_pred = svr_rbf.predict(X_test)
-    
-    #print R squared score
-    score = svr_rbf.score(X_train, y_train)
-    
-    #calculate root mean squared error
-    rmse = math.sqrt(mean_squared_error(y_test, y_pred))
 
+    # fit model on training data
+    svr_rbf.fit(X_train, y_train)
+
+    # make predictions on test data
+    y_pred = svr_rbf.predict(X_test)
+
+    # print R squared score
+    score = svr_rbf.score(X_train, y_train)
+
+    # calculate root mean squared error
+    rmse = math.sqrt(mean_squared_error(y_test, y_pred))
 
     return score, rmse

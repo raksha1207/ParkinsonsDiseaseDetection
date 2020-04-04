@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.feature_selection import SelectFromModel
 
 
 def load_data(path):
@@ -18,7 +20,22 @@ def load_data(path):
     return X_train, X_test, y_train, y_test
 
 
-def extract_features(X_train, X_test):
+def random_forest_features(X_train, y_train, X_test):
+
+    model = SelectFromModel(RandomForestRegressor(n_estimators=1000))
+    model.fit(X_train, y_train)
+
+    selected_feat = X_train.columns[(model.get_support())]
+
+    print("Attributes selected are " + str(selected_feat))
+
+    X_train = X_train[selected_feat]
+    X_test = X_test[selected_feat]
+
+    return X_train, X_test
+
+
+def pca_features(X_train, X_test):
     scalar = StandardScaler()
     scalar.fit(X_train)
 
